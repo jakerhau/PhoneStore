@@ -1,0 +1,94 @@
+<div class="flex flex-col gap-4 h-full">
+    <div class='flex items-center gap-1.5'>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5"
+            stroke="currentColor" class="w-5 h-5">
+            <ellipse cx="256" cy="128" rx="192" ry="80" fill="none" stroke="currentColor" stroke-linecap="round"
+                stroke-miterlimit="10" stroke-width="32" />
+            <path d="M448 214c0 44.18-86 80-192 80S64 258.18 64 214M448 300c0 44.18-86 80-192 80S64 344.18 64 300"
+                fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" />
+            <path d="M64 127.24v257.52C64 428.52 150 464 256 464s192-35.48 192-79.24V127.24" fill="none"
+                stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" />
+        </svg>
+        <span class='font-semibold text-lg'>Quản lý đặt trước</span>
+    </div>
+    <div class="flex flex-col gap-5 p-5 bg-white rounded-sm border border-neutral-5 shadow overflow-hidden">
+        <!-- FORM SEARCH AND BUTTON ADD -->
+        <div class="flex justify-between items-end pb-5 border-b border-neutral-5">
+            <form method="get" class="flex gap-2.5 items-end">
+                <div class="flex flex-col gap-1.5">
+                    <label for="name">Tên khách hàng</label>
+                    <input type="text" name="name" id="name" placeholder="Tìm tên khách hàng" class="base-input-sm" value="{{filters.name}}">
+                </div>
+                <div class="flex flex-col gap-1.5 relative">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" name="phone" id="phone" placeholder="Tìm số điện thoại" class="base-input-sm" value="{{filters.phone}}">
+                </div>
+                {{!-- Trạng thái --}}
+                <div class="flex flex-col gap-1.5">
+                    <label for="status">Trạng thái</label>
+                    <select name="status" id="status" class="base-input-sm">
+                        <option value="">Tất cả</option>
+                        <option value="pending" {{#if (eq filters.status "pending")}}selected{{/if}}>Chờ xác nhận</option>
+                        <option value="confirmed" {{#if (eq filters.status "confirmed")}}selected{{/if}}>Đã xác nhận</option>
+                    </select>
+                </div>
+                <button class="button-secondary-solid-md" type="submit">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5">
+                        <g clip-path="url(#clip0_4223_152)">
+                            <path
+                                d="M11.909 10.9925L14.685 13.7679L13.7679 14.685L10.9925 11.909C9.95987 12.7368 8.67541 13.1871 7.35189 13.1852C4.13189 13.1852 1.51855 10.5719 1.51855 7.35186C1.51855 4.13186 4.13189 1.51852 7.35189 1.51852C10.5719 1.51852 13.1852 4.13186 13.1852 7.35186C13.1871 8.67538 12.7368 9.95984 11.909 10.9925ZM10.6088 10.5116C11.4314 9.66567 11.8908 8.53177 11.8889 7.35186C11.8889 4.84482 9.85828 2.81482 7.35189 2.81482C4.84485 2.81482 2.81485 4.84482 2.81485 7.35186C2.81485 9.85825 4.84485 11.8889 7.35189 11.8889C8.5318 11.8908 9.6657 11.4314 10.5116 10.6088L10.6088 10.5116Z"
+                                fill="white" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_4223_152">
+                                <rect width="15.5556" height="15.5556" fill="white"
+                                    transform="translate(0.222168 0.222229)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <span>Tìm kiếm</span>
+                </button>
+            </form>
+        </div>
+        <div class="flex flex-col h-[50vh] overflow-y-scroll not-show-scroll">
+            <div class="grid border-b-[2px] border-neutral-5 grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
+                <span class="p-2.5 text-neutral-7">Tên khách hàng</span>
+                <span class="p-2.5 text-neutral-7">Sản phẩm</span>
+                <span class="p-2.5 text-neutral-7">Email</span>
+                <span class="p-2.5 text-neutral-7">Số điện thoại</span>
+                <span class="p-2.5 text-neutral-7">Số lượng</span>
+                <span class="p-2.5 text-neutral-7">Trạng thái</span>
+                <span class="p-2.5 text-neutral-7">Ngày tạo</span>
+                <span class="p-2.5 text-neutral-7">Ghi chú</span>
+                <span class="p-2.5 text-neutral-7">Thao tác</span>
+            </div>
+            {{#each preorders}}
+            <div class="grid border-b-[2px] border-neutral-5 grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
+                <span class="p-2.5 text-neutral-10">{{this.customerName}}</span>
+                <span class="p-2.5 text-neutral-10">{{this.productId.name}}</span>
+                <span class="p-2.5 text-neutral-10">{{this.email}}</span>
+                <span class="p-2.5 text-neutral-10">{{this.phone}}</span>
+                <span class="p-2.5 text-neutral-10">{{this.quantity}}</span>
+                <span class="p-2.5 text-neutral-10">{{this.status}}</span>
+                <span class="p-2.5 text-neutral-10">{{formatDate this.createdAt}}</span>
+                <span class="p-2.5 text-neutral-10">{{this.note}}</span>
+                <span class="p-2.5 text-neutral-10 flex items-center gap-2">
+                    <button type="button" 
+                            class="button-primary-ghost-sm py-1 px-2"
+                            data-id="{{this._id}}"
+                            data-action="{{#if (eq this.status "Chờ xác nhận")}}confirm{{else}}pending{{/if}}">
+                        {{#if (eq this.status "Chờ xác nhận")}}
+                            Xác nhận
+                        {{else}}
+                            Chờ xác nhận
+                        {{/if}}
+                    </button>
+                </span>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<script src="/js/preorder.js"></script>

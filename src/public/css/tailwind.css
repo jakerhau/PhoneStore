@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  padding-right: 0px !important;
+}
+
+body {
+  min-width: 320px;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer base {
+  body {
+    @apply bg-theme-white-variant-1 text-base text-theme-black;
+  }
+  hr {
+    @apply border-common-subtitle;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    padding-right: 8px;
+  }
+
+  input[type="password"]::-ms-reveal,
+  input[type="password"]::-ms-clear {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-theme-black/10;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-3xl bg-theme-black/30;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-theme-black/50;
+  }
+}
+
+@layer components {
+  .required-field {
+    @apply after:ml-1 after:text-red-600 after:content-["*"];
+  }
+
+  .base-input {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+  }
+
+  .base-input.error {
+    @apply border-common-error focus:border-common-error;
+  }
+
+  .base-input-sm {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply py-2 pl-4 pr-2;
+  }
+
+  .base-input-md {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply py-4 pl-4 pr-3 text-md;
+  }
+
+  .base-input-lg {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply py-4 pl-4 pr-3 text-lg;
+  }
+
+  .base-select {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply active:border-primary active:outline-none !important;
+    @apply focus-within:border-primary focus-within:outline-none !important;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+  }
+
+  .base-select input {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply active:border-primary active:outline-none !important;
+    @apply focus-within:border-primary focus-within:outline-none !important;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply outline-none;
+  }
+  .base-select.error {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply active:border-primary active:outline-none !important;
+    @apply focus-within:border-primary focus-within:outline-none !important;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply border-common-error focus:border-common-error;
+  }
+  .base-select-sm {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply active:border-primary active:outline-none !important;
+    @apply focus-within:border-primary focus-within:outline-none !important;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply py-2 pl-4 pr-10;
+  }
+
+  .base-select-md {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply active:border-primary active:outline-none !important;
+    @apply focus-within:border-primary focus-within:outline-none !important;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply py-4 pl-4 pr-10 text-md;
+  }
+
+  .base-select-lg {
+    @apply w-full rounded-lg border border-theme-black/10 bg-theme-white text-left font-normal text-theme-black caret-primary;
+    @apply focus:border-primary focus:outline-none !important;
+    @apply placeholder:font-light placeholder:not-italic placeholder:text-theme-black/30;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply active:border-primary active:outline-none !important;
+    @apply focus-within:border-primary focus-within:outline-none !important;
+    @apply disabled:bg-theme-black/5 disabled:focus:border-theme-black/10;
+    @apply py-4 pl-4 pr-10 text-lg;
+  }
+
+  .button-primary-solid-sm {
+    @apply rounded-sm text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-2 text-sm leading-5 font-semibold bg-primary text-theme-white hover:bg-primary-variant-1 active:bg-primary-variant-2;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-primary-solid-md {
+    @apply rounded-md text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-4 text-sm leading-5 font-semibold bg-primary text-theme-white hover:bg-primary-variant-1 active:bg-primary-variant-2;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-primary-solid-lg {
+    @apply rounded-lg text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-4 px-4 text-md font-semibold bg-primary text-theme-white hover:bg-primary-variant-1 active:bg-primary-variant-2;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+
+  .button-primary-ghost-sm {
+    @apply rounded-sm text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-2 text-sm leading-5 font-semibold text-primary bg-primary-1 hover:bg-primary-2 active:bg-primary/20;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-primary-ghost-md {
+    @apply rounded-md text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-4 text-sm leading-5 font-semibold text-primary bg-primary-1 hover:bg-primary-2 active:bg-primary/20;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-primary-ghost-lg {
+    @apply rounded-lg text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-4 px-4 text-md font-semibold text-primary bg-primary-1 hover:bg-primary-2 active:bg-primary/20;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+
+  .button-secondary-solid-sm {
+    @apply rounded-sm text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-2 text-sm leading-5 font-semibold bg-secondary text-theme-white hover:bg-secondary-variant-1 active:bg-secondary-variant-2;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-secondary-solid-md {
+    @apply rounded-md text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-4 text-sm leading-5 font-semibold bg-secondary text-theme-white hover:bg-secondary-variant-1 active:bg-secondary-variant-2;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-secondary-solid-lg {
+    @apply rounded-lg text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-4 px-4 text-md font-semibold bg-secondary text-theme-white hover:bg-secondary-variant-1 active:bg-secondary-variant-2;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+
+  .button-red-solid-sm {
+    @apply rounded-sm text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-2 text-sm leading-5 font-semibold bg-red-6 text-theme-white hover:bg-red-7 active:bg-red-7;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-red-solid-md {
+    @apply rounded-md text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-4 text-sm leading-5 font-semibold bg-red-6 text-theme-white hover:bg-red-7 active:bg-red-7;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-red-solid-lg {
+    @apply rounded-lg text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-4 px-4 text-md font-semibold bg-red-6 text-theme-white hover:bg-red-7 active:bg-red-7;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+
+  .button-red-ghost-sm {
+    @apply rounded-sm text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-2 text-sm leading-5 font-semibold text-red-5 bg-red-1 hover:bg-red-2 active:bg-red-5/20;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-red-ghost-md {
+    @apply rounded-md text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-2.5 px-4 text-sm leading-5 font-semibold text-red-5 bg-red-1 hover:bg-red-2 active:bg-red-5/20;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+  .button-red-ghost-lg {
+    @apply rounded-lg text-center text-base duration-150 inline-flex justify-center items-center gap-2;
+    @apply py-4 px-4 text-md font-semibold text-red-5 bg-red-1 hover:bg-red-2 active:bg-red-5/20;
+    @apply disabled:pointer-events-none disabled:border-transparent disabled:bg-theme-white-variant-3 disabled:bg-none disabled:text-theme-black/30 disabled:hover:shadow-none;
+  }
+
+  .nav-item {
+    @apply flex flex-row items-center gap-x-3 w-full p-2 pl-8 rounded-full  hover:ml-4 text-primary hover:text-white bg-white hover:bg-primary transform ease-in-out duration-300 cursor-pointer;
+  }
+
+  .nav-item-mini {
+    @apply flex justify-end w-full p-3 rounded-full pr-5 hover:ml-4 text-primary hover:text-white bg-white hover:bg-primary transform ease-in-out duration-300 cursor-pointer;
+  }
+
+  .not-show-scroll::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  /* Track */
+  .not-show-scroll::-webkit-scrollbar-track {
+    @apply bg-primary-1;
+  }
+
+  /* Handle */
+  .not-show-scroll::-webkit-scrollbar-thumb {
+    @apply bg-primary-2;
+  }
+
+  /* Handle on hover */
+  .not-show-scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-3;
+  }
+}

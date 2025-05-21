@@ -1,0 +1,124 @@
+<div class="flex flex-col gap-4 h-full">
+  <div class='flex items-center gap-1.5'>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5">
+        <path d="M160 80c0-26.5 21.5-48 48-48l32 0c26.5 0 48 21.5 48 48l0 352c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48l0-352zM0 272c0-26.5 21.5-48 48-48l32 0c26.5 0 48 21.5 48 48l0 160c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48L0 272zM368 96l32 0c26.5 0 48 21.5 48 48l0 288c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48z"></path>
+    </svg>
+    <span class='font-semibold text-lg'>Mã giảm giá</span>
+  </div>
+  
+  <div class="flex flex-col gap-5 h-full p-5 bg-white rounded-sm border border-neutral-5 shadow">
+    <!-- FORM SEARCH AND BUTTON ADD -->
+    <div class="flex justify-between items-end pb-5 border-b border-neutral-5">
+      <form id="filterForm" method="get" action="/admin/promotions" class="flex gap-2.5 items-end">
+        <div class="flex flex-col gap-1.5">
+          <label for="saleDate">Tìm kiếm theo tên</label>
+          <input type="text" name="name" id="name" class="base-input-sm" value="{{name}}">
+        </div>
+        <div class="flex flex-col gap-1.5">
+            <label for="status">Trạng thái</label>
+            <select name="status" id="status" class="base-input-sm">
+                <option value="all">Tất cả</option>
+                <option value="active">Hoạt động</option>
+                <option value="inactive">Không hoạt động</option>
+            </select>
+        </div>
+        <div class="flex flex-col gap-1.5">
+            <label for="startDate">Từ ngày</label>
+            <input type="date" name="startDate" id="startDate" class="base-input-sm" value="{{startDate}}">
+        </div>
+        <div class="flex flex-col gap-1.5">
+            <label for="endDate">Đến ngày</label>
+            <input type="date" name="endDate" id="endDate" class="base-input-sm" value="{{endDate}}">
+        </div>
+
+        <button class="button-secondary-solid-md" type="submit">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+            <g clip-path="url(#clip0_4223_152)">
+              <path d="M11.909 10.9925L14.685 13.7679L13.7679 14.685L10.9925 11.909C9.95987 12.7368 8.67541 13.1871 7.35189 13.1852C4.13189 13.1852 1.51855 10.5719 1.51855 7.35186C1.51855 4.13186 4.13189 1.51852 7.35189 1.51852C10.5719 1.51852 13.1852 4.13186 13.1852 7.35186C13.1871 8.67538 12.7368 9.95984 11.909 10.9925ZM10.6088 10.5116C11.4314 9.66567 11.8908 8.53177 11.8889 7.35186C11.8889 4.84482 9.85828 2.81482 7.35189 2.81482C4.84485 2.81482 2.81485 4.84482 2.81485 7.35186C2.81485 9.85825 4.84485 11.8889 7.35189 11.8889C8.5318 11.8908 9.6657 11.4314 10.5116 10.6088L10.6088 10.5116Z" fill="white" />
+            </g>
+            <defs>
+              <clipPath id="clip0_4223_152">
+                <rect width="15.5556" height="15.5556" fill="white" transform="translate(0.222168 0.222229)" />
+              </clipPath>
+            </defs>
+          </svg>
+          <span>Tìm kiếm</span>
+        </button>
+      </form>
+      <span></span>
+        <a href="/admin/promotions/add" class="button-primary-solid-md ml-auto">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+          <g clip-path="url(#clip0_4225_4719)">
+            <path
+              d="M7.35186 7.35186V4.75926H8.64815V7.35186H11.2407V8.64815H8.64815V11.2407H7.35186V8.64815H4.75926V7.35186H7.35186ZM8.00001 14.4815C4.42028 14.4815 1.51852 11.5797 1.51852 8.00001C1.51852 4.42028 4.42028 1.51852 8.00001 1.51852C11.5797 1.51852 14.4815 4.42028 14.4815 8.00001C14.4815 11.5797 11.5797 14.4815 8.00001 14.4815ZM8.00001 13.1852C9.3752 13.1852 10.6941 12.6389 11.6665 11.6665C12.6389 10.6941 13.1852 9.3752 13.1852 8.00001C13.1852 6.62481 12.6389 5.30594 11.6665 4.33353C10.6941 3.36112 9.3752 2.81482 8.00001 2.81482C6.62481 2.81482 5.30594 3.36112 4.33353 4.33353C3.36112 5.30594 2.81482 6.62481 2.81482 8.00001C2.81482 9.3752 3.36112 10.6941 4.33353 11.6665C5.30594 12.6389 6.62481 13.1852 8.00001 13.1852Z"
+              fill="white" />
+          </g>
+          <defs>
+            <clipPath id="clip0_4225_4719">
+              <rect width="15.5556" height="15.5556" fill="white" transform="translate(0.222229 0.222229)" />
+            </clipPath>
+          </defs>
+        </svg>
+          <span>Thêm mã giảm giá</span>
+        </a>
+    </div>
+    <div class="flex flex-col">
+      <div class="grid border-b-[2px] border-neutral-5 grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
+        <span class="p-2.5 text-neutral-7">Tên</span>
+        <span class="p-2.5 text-neutral-7">Mô tả</span>
+        <span class="p-2.5 text-neutral-7">Điểm quy đổi</span>
+        <span class="p-2.5 text-neutral-7">Loại</span>
+        <span class="p-2.5 text-neutral-7">Giá trị</span>
+        <span class="p-2.5 text-neutral-7">Ngày bắt đầu</span>
+        <span class="p-2.5 text-neutral-7">Ngày kết thúc</span>
+        <span class="p-2.5 text-neutral-7">Trạng thái</span>
+        <span class="p-2.5 text-neutral-7">Sản phẩm áp dụng</span>
+        <span class="p-2.5 text-neutral-7">Thao tác</span>
+      </div>
+      {{#each promotions}}
+        <div class="grid border-b-[2px] border-neutral-5 grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]">
+            <span class="p-2.5 text-neutral-10">{{name}}</span>
+            <span class="p-2.5 text-neutral-10">{{description}}</span>
+            <span class="p-2.5 text-neutral-10">{{pointsRequired}}</span>
+            <span class="p-2.5 text-neutral-10">{{discountType}}</span>
+            <span class="p-2.5 text-neutral-10">{{discountValue}}</span>
+            <span class="p-2.5 text-neutral-10">{{formatDate startDate}}</span>
+            <span class="p-2.5 text-neutral-10">{{formatDate endDate}}</span>
+            <span class="p-2.5 text-neutral-10">{{status}}</span>
+            <span class="p-2.5 text-neutral-10">
+                {{#if (eq applicableProducts 'all')}}
+                    Tất cả sản phẩm
+                {{else}}
+                    {{applicableProducts.name}}
+                {{/if}}
+            </span>
+            <span class="p-2.5 text-neutral-10">
+                <a href="/admin/promotions/edit/{{_id}}" class="button-primary-ghost-sm py-1 px-2">Sửa</a>
+                <form action="/admin/promotions/{{_id}}?_method=DELETE" method="POST" style="display: inline;">
+                    <button type="submit" class="button-primary-ghost-sm py-1 px-2" onclick="return confirm('Bạn có chắc chắn muốn xóa mã giảm giá này?')">Xóa</button>
+                </form>
+            </span>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<script>
+function deletePromotion(id) {
+    if (confirm('Bạn có chắc chắn muốn xóa mã giảm giá này?')) {
+        fetch(`/admin/promotions/${id}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.reload();
+        })
+        .catch(error => {
+           console.log(error);
+        });
+    }
+}
+</script>
+
+
