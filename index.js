@@ -69,7 +69,7 @@ const hbs = exphbs.create({
             return options.inverse(this);
         },
         or: function(a, b) {
-            return a || b;
+            return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
         }
     },
 });

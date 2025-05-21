@@ -40,8 +40,8 @@
                 <div class="flex flex-col gap-1.5">
                     <label for="status">Trạng thái</label>
                     <select name="status" id="status" class="base-input-sm" required>
-                        <option value="active" {{#if supplier.isActive}}selected{{/if}}>Hoạt động</option>
-                        <option value="inactive" {{#unless supplier.isActive}}selected{{/unless}}>Không hoạt động</option>
+                        <option value="active" {{#if (eq supplier.isActive true)}}selected{{/if}}>Hoạt động</option>
+                        <option value="inactive" {{#if (eq supplier.isActive false)}}selected{{/if}}>Không hoạt động</option>
                     </select>
                 </div>
             </div>

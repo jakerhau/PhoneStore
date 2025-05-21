@@ -16,8 +16,7 @@ class CustomersController{
         }
         Customer.find(searchQuery)
         .then(customers => {
-            Promise.all([ customers, Transaction.find({})
-            ]) 
+            return Promise.all([customers, Transaction.find({})])
             .then(([customers, transactions]) => {
                 const customerStats = customers.map(customer => {
                     const customerTransactions = transactions.filter(
@@ -43,12 +42,49 @@ class CustomersController{
                     fullname: full_name || '',
                     phone: phone_number || '' 
                 });
-            })
-            .catch(next);
+            });
         })
         .catch(next);
     }
 
+    // [GET] /customers/add
+    add(req, res) {
+        res.render('customers/add');
+    }
+
+    // [POST] /customers/add
+    store(req, res, next) {
+        const customer = new Customer(req.body);
+        customer.save()
+            .then(() => {
+                req.flash('success', 'Thêm khách hàng thành công');
+                res.redirect('/admin/customers');
+            })
+            .catch(next);
+    }
+
+    // [GET] /customers/edit
+    edit(req, res, next) {
+        const customerId = req.query.id;
+        Customer.findById(customerId)
+            .then(customer => {
+                res.render('customers/edit', {
+                    customer: mongooseToObject(customer)
+                });
+            })
+            .catch(next);
+    }
+
+    // [PUT] /customers/edit
+    update(req, res, next) {
+        const customerId = req.query.id;
+        Customer.updateOne({ _id: customerId }, req.body)
+            .then(() => {
+                req.flash('success', 'Cập nhật khách hàng thành công');
+                res.redirect('/admin/customers');
+            })
+            .catch(next);
+    }
     
     show(req, res, next) {
         const customerId = req.query.id; 
@@ -102,7 +138,6 @@ class CustomersController{
             })
             .catch(next);
     }
-    
 }
 
 module.exports = new CustomersController();

@@ -9,9 +9,11 @@
   <div class="flex flex-col gap-5 p-5 bg-white rounded-sm border border-neutral-5 shadow overflow-hidden">
 
     <div class="grid grid-cols-[1fr] sm:grid-cols-[1fr_1fr] gap-4">
+      {{#if (or (eq user.role "Quản trị viên") (eq user.role "Nhân viên bán hàng"))}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded text-slate-100">
         <a href="/admin/transactions">Quản lý giao dịch</a>
       </div>
+      {{/if}}
       {{#if (eq user.role "Quản trị viên")}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% rounded text-slate-100">
         <a href="/admin/users">Quản lý nhân viên</a>
@@ -20,23 +22,31 @@
         <a href="/admin/reports">Báo cáo và thống kê</a>
       </div>
       {{/if}}
+      {{#if (or (eq user.role "Quản trị viên") (eq user.role "Nhân viên bán hàng"))}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-cyan-500 to-yellow-500  rounded text-slate-100">
         <a href="/admin/customers">Quản lý khách hàng</a>
       </div>
+      {{/if}}
       {{#if (or (eq user.role "Quản trị viên") (eq user.role "Nhân viên kho"))}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-yellow-200 via-orange-300 to-pink-300  rounded text-slate-100">
         <a href="/admin/products">Quản lý sản phẩm</a>
       </div>
       {{/if}}
+      {{#if (or (eq user.role "Quản trị viên") (eq user.role "Nhân viên kho"))}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded text-slate-100">
         <a href="/admin/suppliers">Quản lý Nhà phân phối</a>
       </div>
+      {{/if}}
+      {{#if (or (eq user.role "Quản trị viên") (eq user.role "Nhân viên bán hàng"))}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-cyan-500 via-sky-300 to-teal-500 rounded text-slate-100">
         <a href="/admin/preorder">Quản lý Đặt trước</a>
       </div>
+      {{/if}}
+      {{#if (eq user.role "Quản trị viên")}}
       <div class="flex items-center justify-center  h-36 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% rounded text-slate-100">
         <a href="/admin/promotions">Quản lý Mã giảm giá</a>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>

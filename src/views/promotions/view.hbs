@@ -1,0 +1,67 @@
+{{!-- Show promotion info --}}
+<div class="relative flex flex-col gap-4 pb-6 overflow-x-clip">
+  <div class='flex items-center gap-1.5'>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 512 512">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M344 280l88-88M232 216l64 64M80 320l104-104" />
+      <circle cx="456" cy="168" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+      <circle cx="320" cy="304" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+      <circle cx="208" cy="192" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+      <circle cx="56" cy="344" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+    </svg>
+    <span class='font-semibold text-lg'>Thông tin khuyến mãi</span>
+  </div>
+  <div class="grid grid-cols-1 items-start gap-4">
+    <div class="col-span-1 md:col-span-1 flex flex-col gap-4">
+      <div class="flex flex-col gap-5 p-5 bg-white rounded border border-neutral-5 shadow overflow-hidden">
+        <div class="flex flex-col gap-1.5">
+          <span class="pb-2.5 text-[15px] font-semibold leading-5 border-b border-neutral-5">Thông tin khuyến mãi</span>
+          <div class="grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr_2fr] gap-2.5">
+            <div class="flex flex-col gap-1.5">
+              <label for="name">Tên khuyến mãi</label>
+              <input type="text" name="name" id="name" class="base-input-sm" value="{{promotion.name}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="pointsRequired">Điểm yêu cầu</label>
+              <input type="text" name="pointsRequired" id="pointsRequired" class="base-input-sm" value="{{promotion.pointsRequired}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="discountType">Loại giảm giá</label>
+              <input type="text" name="discountType" id="discountType" class="base-input-sm" value="{{#if (eq promotion.discountType 'fixed')}}Cố định{{else}}Phần trăm{{/if}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="discountValue">Giá trị giảm giá</label>
+              <input type="text" name="discountValue" id="discountValue" class="base-input-sm" value="{{promotion.discountValue}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="startDate">Ngày bắt đầu</label>
+              <input type="text" name="startDate" id="startDate" class="base-input-sm" value="{{formatDate promotion.startDate}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="endDate">Ngày kết thúc</label>
+              <input type="text" name="endDate" id="endDate" class="base-input-sm" value="{{formatDate promotion.endDate}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="status">Trạng thái</label>
+              <input type="text" name="status" id="status" class="base-input-sm" value="{{#if (eq promotion.status 'active')}}Hoạt động{{else}}Không hoạt động{{/if}}" disabled>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="applicableProducts">Sản phẩm áp dụng</label>
+              <input type="text" name="applicableProducts" id="applicableProducts" class="base-input-sm" value="{{#if (eq promotion.applicableProducts 'all')}}Tất cả sản phẩm{{else}}{{promotion.applicableProducts.name}}{{/if}}" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <span class="pb-2.5 text-[15px] font-semibold leading-5 border-b border-neutral-5">Mô tả</span>
+          <div class="p-2 border rounded">
+            <p class="text-sm">{{promotion.description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2.5">
+        <a href="/admin/promotions" class="button-secondary-solid-sm">Quay lại</a>
+        <a href="/admin/promotions/edit/{{promotion._id}}/view" class="button-primary-solid-sm">Chỉnh sửa</a>
+      </div>
+    </div>
+  </div>
+</div>
+

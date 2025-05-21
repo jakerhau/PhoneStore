@@ -24,16 +24,16 @@
 </head>
 
 <body>
-
-
     {{> header}}
 
     {{{body}}}
+    
     {{#if message}}
         {{> notification}}
     {{/if}}
 
     {{> footer}}
+    
     <script>
         {{#if success}}
             toastr.success('{{success}}');
@@ -42,10 +42,7 @@
         {{#if error}}
             toastr.error('{{error}}');
         {{/if}}
-
-        req.flash = null;
     </script>
-
 </body>
 
 </html>

@@ -45,6 +45,29 @@ exports.isSalesStaff = (req, res, next) => {
     }
 };
 
+// New middleware for role-based permissions
+exports.hasPermission = (allowedRoles) => {
+    return (req, res, next) => {
+        if (!req.session.user) {
+            req.flash('error', 'Vui lòng đăng nhập để tiếp tục');
+            return res.redirect('/auth/login');
+        }
+
+        // Admin has access to everything
+        if (req.session.user.role === ROLES.ADMIN) {
+            return next();
+        }
+
+        // Check if user's role is in allowed roles
+        if (allowedRoles.includes(req.session.user.role)) {
+            return next();
+        }
+
+        req.flash('error', 'Bạn không có quyền truy cập trang này');
+        res.redirect('/admin/dashboard');
+    };
+};
+
 exports.ensureFirstLogin = (req, res, next) => {
     const user = req.body.username;
     if (!user) {
@@ -71,5 +94,5 @@ exports.ensureFirstLogin = (req, res, next) => {
             req.flash('message', 'Tên đăng nhập không tồn tại');
             res.redirect('/auth/login');
         });
-}
+};
 

@@ -1,16 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const batchController = require('../controllers/batch/batchController');
+const { loggedIn, hasPermission } = require('../middleware/auth');
+const { ROLES } = require('../models/User');
 
-//thêm lô hàng tương ứng với nhà cung cấp
-router.get('/add/:supplierId', batchController.viewAdd);
-router.post('/add/:supplierId', batchController.add);
-
-// xem chi tiết lô hàng
-// router.get('/:id', batchController.view);
-
-// cập nhật lô hàng
-router.get('/edit/:id', batchController.edit);
-router.post('/edit/:id', batchController.edit);
+router.get('/add/:supplierId', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), batchController.viewAdd);
+router.post('/add/:supplierId', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), batchController.add);
+router.put('/edit/:id', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), batchController.edit);
+router.delete('/delete/:id', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), batchController.delete);
 
 module.exports = router;

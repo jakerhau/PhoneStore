@@ -1,22 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const supplierController = require('../controllers/supplier/supplierController');
+const { loggedIn, hasPermission } = require('../middleware/auth');
+const { ROLES } = require('../models/User');
 
-// Hiển thị danh sách nhà cung cấp
-router.get('/', supplierController.index);
-
-// Thêm nhà cung cấp mới
-router.get('/add', supplierController.viewAdd); 
-router.post('/add', supplierController.add);
-
-// Dừng nhà cung cấp
-router.get('/stop/:id', supplierController.stopSupplier);
-
-// Xem chi tiết nhà cung cấp
-router.get('/:id', supplierController.view);
-
-// Cập nhật nhà cung cấp
-router.get('/edit/:id', supplierController.viewEdit);
-router.post('/edit/:id', supplierController.edit);
+router.get('/', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), supplierController.index);
+router.get('/:id', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), supplierController.view);
+router.get('/add', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), supplierController.add);
+router.get('/edit/:id', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), supplierController.edit);
+router.get('/stop/:id', loggedIn, hasPermission([ROLES.ADMIN, ROLES.WAREHOUSE_STAFF]), supplierController.stopSupplier);
 
 module.exports = router;

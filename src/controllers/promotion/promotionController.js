@@ -1,6 +1,6 @@
 const Promotion = require('../../models/Promotion');
 const Product = require('../../models/Product');
-const { multipleMongooseToObject } = require('../../util/mongoose');
+const {mongooseToObject, multipleMongooseToObject } = require('../../util/mongoose');
 const Customer = require('../../models/Customer');
 
 class PromotionController {
@@ -114,20 +114,49 @@ class PromotionController {
             });
     }
 
-    // [GET] /promotions/edit?id=
+    // [GET] /promotions/edit/:id
     edit(req, res, next) {
-        Promotion.findById(req.query.id)
-            .then(promotion => res.render('promotions/edit', {
+        const id = req.params.id;
+        if (!id) {
+            req.flash('error', 'Không có id');
+            return res.redirect('/admin/promotions');
+        }
+        Promotion.findById(id)
+            .then(promotion => res.render('promotions/view', {
                 layout: 'layout',
-                promotion: singleMongooseToObject(promotion)
+                promotion: mongooseToObject(promotion)
+            }))
+            .catch(next);
+    }
+
+    // [GET] /promotions/edit/:id return edit page
+    viewEdit(req, res, next) {
+        const id = req.params.id;
+        if (!id) {
+            req.flash('error', 'Không có id');
+            return res.redirect('/admin/promotions');
+        }
+        Promise.all([
+            Promotion.findById(id),
+            Product.find({})
+        ])
+            .then(([promotion, products]) => res.render('promotions/edit', {
+                layout: 'layout',
+                promotion: mongooseToObject(promotion),
+                products: multipleMongooseToObject(products)
             }))
             .catch(next);
     }
 
     // [PUT] /promotions/:id
     update(req, res, next) {
-        Promotion.findByIdAndUpdate(req.params.id, req.body)
-            .then(() => res.redirect('/promotions'))
+        const id = req.params.id;
+        if (!id) {
+            req.flash('error', 'Không có id');
+            return res.redirect('/admin/promotions');
+        }
+        Promotion.findByIdAndUpdate(id, req.body)
+            .then(() => res.redirect('/admin/promotions'))
             .catch(next);
     }
     
