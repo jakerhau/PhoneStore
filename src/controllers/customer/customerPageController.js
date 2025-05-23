@@ -18,17 +18,12 @@ class CustomerPageController {
 
     // [GET] /products - Trang sản phẩm
     products(req, res, next) {
-        const { brand, price, sort, search, filter } = req.query;
+        const { brand, price, sort, search} = req.query;
         let query = { quantity: { $gt: 0 } };
 
         // Filter by brand
         if (brand) {
             query.brand = brand;
-        }
-
-        // Filter by category
-        if (filter) {
-            query.category = filter;
         }
 
         // Filter by price range
@@ -80,7 +75,7 @@ class CustomerPageController {
                 res.render('customer/products', {
                     layout: 'customerLayout',
                     products: multipleMongooseToObject(products),
-                    filters: { brand, price, sort, search, filter }
+                    filters: { brand, price, sort, search }
                 });
             })
             .catch(next);

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         productsGrid.innerHTML = '<div class="col-span-full text-center py-8"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div></div>';
 
         // Gửi request AJAX
-        fetch(`/products?sort=${sort}&filter=${filter}`, {
+        fetch(`/products?sort=${sort}`, {
             headers: {
                 'Accept': 'application/json'
             }
