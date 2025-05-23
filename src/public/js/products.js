@@ -70,3 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
     sortSelect.addEventListener('change', updateProducts);
     filterSelect.addEventListener('change', updateProducts);
 }); 
+
+function openPreorderModal(productId, productName) {
+    document.getElementById('preorderModal').classList.remove('hidden');
+    document.getElementById('preorderProductId').value = productId;
+    document.querySelector('input[name="productName"]').value = productName;
+} 
