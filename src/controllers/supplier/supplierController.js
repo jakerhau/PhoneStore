@@ -98,17 +98,38 @@ exports.stopSupplier = async (req, res, next) => {
         });
 
         if (activeBatches.length > 0) {
-            req.flash('error', 'Không thể dừng nhà cung cấp đang có lô hàng đang hoạt động');
+            req.flash('error', 'Không thể ngừng hoạt động nhà cung cấp đang có lô hàng đang hoạt động');
             return res.redirect('/admin/suppliers');
         }
 
         supplier.isActive = false;
         await supplier.save();
-        req.flash('success', 'Đã dừng nhà cung cấp thành công');
+        req.flash('success', 'Đã ngừng hoạt động nhà cung cấp thành công');
         res.redirect('/admin/suppliers');
     } catch (error) {
         console.log(error);
-        req.flash('error', 'Có lỗi xảy ra khi dừng nhà cung cấp');
+        req.flash('error', 'Có lỗi xảy ra khi ngừng hoạt động nhà cung cấp');
+        res.redirect('/admin/suppliers');
+    }
+}
+
+exports.activeSupplier = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const supplier = await Supplier.findById(id);
+        
+        if (!supplier) {
+            req.flash('error', 'Không tìm thấy nhà cung cấp');
+            return res.redirect('/admin/suppliers');
+        }
+
+        supplier.isActive = true;
+        await supplier.save();
+        req.flash('success', 'Đã kích hoạt nhà cung cấp thành công');
+        res.redirect('/admin/suppliers');
+    } catch (error) {
+        console.log(error);
+        req.flash('error', 'Có lỗi xảy ra khi kích hoạt nhà cung cấp');
         res.redirect('/admin/suppliers');
     }
 }
@@ -124,7 +145,7 @@ exports.view = async (req, res, next) => {
         }
 
         const batches = await Batch.find({ supplier: id })
-            .sort({ importDate: -1 }); // Sort by import date descending
+            .sort({ importDate: -1 }); 
 
         res.render('suppliers/view', { 
             supplier: mongooseToObject(supplier), 

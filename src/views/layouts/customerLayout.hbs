@@ -9,6 +9,10 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Link Google Fonts Quicksand -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body class="bg-gray-50">
@@ -16,18 +20,27 @@
     <header class="bg-white shadow-sm fixed w-full top-0 z-50">
         <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-16">
-                <a href="#" class="text-2xl font-bold text-indigo-600">PhoneStore</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="/" class="text-gray-600 hover:text-indigo-600 transition">Trang chủ</a>
-                    <a href="/products" class="text-gray-600 hover:text-indigo-600 transition">Sản phẩm</a>
-                    <a href="/contact" class="text-gray-600 hover:text-indigo-600 transition">Liên hệ</a>
-                    <a href="/points" class="text-gray-600 hover:text-indigo-600 transition">Tra cứu điểm</a>
+                {{!-- <a href="#" class="text-2xl font-bold text-indigo-600">PhoneStore</a> --}}
+                <a href="#" class="flex items-center space-x-2">
+                <!-- Chữ PhoneStore kiểu gradient + stripe -->
+                <span class="text-2xl font-extrabold uppercase bg-gradient-to-r from-pink-500 via-purple-600 to-blue-800 text-transparent bg-clip-text relative">
+                    <span class="absolute inset-0 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22><path d=%22M0,20 L20,0 L20,5 L5,20 Z%22 fill=%22white%22 fill-opacity=%220.2%22 /></svg>')] bg-repeat bg-[length:20px_20px] bg-clip-text text-transparent pointer-events-none"></span>
+                    PhoneStore
+                </span>
+                </a>
+
+                <!-- Menu navigation -->
+                <div class="hidden md:flex items-center space-x-8 font-bold text-lg" style="font-family: 'Quicksand', sans-serif;">
+                    <a href="/" class="text-red-600 hover:text-indigo-600">Trang chủ</a>
+                    <a href="/products" class="text-black hover:text-indigo-600">Sản phẩm</a>
+                    <a href="/contact" class="text-black hover:text-indigo-600">Liên hệ</a>
+                    <a href="/points" class="text-black hover:text-indigo-600">Tra cứu điểm</a>
                 </div>
             </div>
             <div class="flex items-center space-x-6">
                 {{!-- Tôi muốn search tên sản phẩm --}}
                 <form action="/products" method="get">
-                    <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-3 py-2">
+                    <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-3 py-2" style="font-family: 'Quicksand', sans-serif;">
                         <input type="text" name="search" placeholder="Tìm kiếm..." class="bg-transparent border-none focus:outline-none w-64">
                         <i class="fas fa-search text-gray-400"></i>
                     </div>
@@ -42,32 +55,61 @@
     </main>
 
     {{!-- Footer --}}
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Về chúng tôi</h4>
-                    <p class="text-gray-400">Cửa hàng PhoneStore</p>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Dịch vụ khách hàng</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Liên hệ chúng tôi</a></li>
-                        <li><a href="#" class="hover:text-white transition">Câu hỏi thường gặp</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Kết nối với chúng tôi</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-               
+    <footer class="bg-gray-900 text-white pt-16 pb-10">
+  <div class="container mx-auto px-4">
+    <div class="grid md:grid-cols-3 gap-12">
+      
+      <!-- Cột 1: Giới thiệu -->
+      <div>
+        <h4 class="text-2xl font-bold mb-4 uppercase">Về PhoneStore</h4>
+        <p class="text-gray-400 mb-4">PhoneStore chuyên cung cấp các dòng điện thoại mới nhất, chính hãng với giá tốt nhất.</p>
+        <div class="flex space-x-3 mt-4">
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+        </div>
+      </div>
+
+      <!-- Cột 2: Thông tin liên hệ -->
+      <div>
+        <h4 class="text-2xl font-bold mb-4 uppercase">Liên hệ</h4>
+        <ul class="space-y-3 text-gray-400">
+          <li><i class="fas fa-map-marker-alt mr-2 text-white"></i>19 Nguyễn Hữu Thọ, Phường Tân Phong, Quận 7, TP. Hồ Chí Minh</li>
+          <li><i class="fas fa-envelope mr-2 text-white"></i> support@phonestore.vn</li>
+          <li><i class="fas fa-phone mr-2 text-white"></i>+84 (28) 37 755 055</li>
+        </ul>
+      </div>
+
+      <!-- Cột 3: Giờ làm việc -->
+        <div>
+        <h4 class="text-2xl font-bold mb-4 uppercase text-white">Giờ làm việc</h4>
+        <div class="max-w-xs border border-gray-300 divide-y divide-gray-300 bg-white text-gray-800 rounded-md shadow">
+            <div class="flex justify-between px-4 py-3">
+            <span>Thứ 2 - Thứ 5:</span>
+            <span>8am - 9pm</span>
+            </div>
+            <div class="flex justify-between px-4 py-3">
+            <span>Thứ 6 - Thứ 7:</span>
+            <span>8am - 1am</span>
+            </div>
+            <div class="flex justify-between px-4 py-3">
+            <span>Chủ nhật:</span>
+            <span>9am - 10pm</span>
             </div>
         </div>
+        </div>
+
+
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+    © 2025 PhoneStore. All rights reserved.
+  </div>
     </footer>
+
 </body>
 <script src="/js/search.js"></script>
 

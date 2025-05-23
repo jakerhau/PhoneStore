@@ -73,7 +73,15 @@
         </span>
         <span class="p-2.5 text-neutral-5">
             <a href="/admin/suppliers/{{_id}}" class="button-primary-solid-sm">Xem</a>
-            <a href="/admin/suppliers/delete/{{_id}}" class="button-secondary-solid-sm">Xóa</a>
+            <form action="/admin/suppliers/{{#if isActive}}stop{{else}}active{{/if}}/{{_id}}" method="POST" style="display: inline;">
+                <button type="submit" class="button-primary-ghost-sm py-1 px-2" onclick="return confirm('Bạn có chắc chắn muốn {{#if isActive}}ngừng hoạt động{{else}}kích hoạt{{/if}} nhà cung cấp này?')">
+                    {{#if isActive}}
+                        Ngừng hoạt động
+                    {{else}}
+                        Kích hoạt
+                    {{/if}}
+                </button>
+            </form>
         </span>
     </div>
     {{/each}}

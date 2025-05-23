@@ -1,4 +1,4 @@
-<section class="relative h-[600px] overflow-hidden mb-40">
+{{!-- <section class="relative h-[600px] overflow-hidden mb-40">
     <div class="absolute inset-0">
         <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9" alt="Hero Image" class="w-full h-full object-cover">
     </div>
@@ -11,4 +11,90 @@
         </div>
     </div>
 </section>
+ --}}
+
+<section class="relative h-[700px] bg-black overflow-hidden mb-40">
+  <!-- Video nền YouTube nhúng iframe -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <iframe
+      src="https://www.youtube.com/embed/RHPdH3yP-Eg?autoplay=1&mute=1&loop=1&playlist=RHPdH3yP-Eg&controls=0&showinfo=0&autohide=1&modestbranding=1&rel=0"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      title="Video nền"
+      style="position:absolute; top:50%; left:50%; width:177.77vh; height:100vh; transform:translate(-50%, -50%); pointer-events:none;"
+    ></iframe>
+  </div>
+
+  <!-- Overlay đen mờ -->
+  <div class="absolute inset-0 bg-black/60 flex items-center justify-center z-10">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+        PHONESTORE <br>
+      </h1>
+      <a href="/products"
+         class="inline-block border-2 border-white text-white text-lg px-8 py-3 rounded-full hover:bg-white hover:text-black transition">
+        MUA NGAY
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-20">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold uppercase mb-4 tracking-widest">What Makes the iPhone 16 Pro Different?</h2>
+    <p class="text-gray-500 tracking-widest uppercase mb-16">Experience the Future of Smartphone Technology</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Feature 1: Camera -->
+      <div class="flex flex-col items-center">
+        <!-- Camera Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4">
+          <rect x="8" y="16" width="48" height="32" rx="6" ry="6"/>
+          <circle cx="24" cy="32" r="6"/>
+          <circle cx="40" cy="32" r="4"/>
+          <rect x="50" y="20" width="4" height="8" rx="1"/>
+        </svg>
+        <h4 class="text-sm font-semibold text-gray-700 uppercase mb-1">Pro Camera System</h4>
+        <h3 class="text-xl font-bold uppercase mb-2">48MP Fusion Camera</h3>
+        <p class="text-gray-500 max-w-xs">
+          Capture stunning photos and videos with the advanced 48MP Fusion camera, featuring a second-gen quad-pixel sensor and 4K Dolby Vision.
+        </p>
+      </div>
+
+      <!-- Feature 2: A18 Pro Chip -->
+      <div class="flex flex-col items-center">
+        <!-- Chip Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4">
+          <rect x="16" y="16" width="32" height="32" rx="4" ry="4"/>
+          <path d="M24 24h16v16H24z"/>
+          <path d="M8 24h4M8 32h4M8 40h4M52 24h4M52 32h4M52 40h4M24 8v4M32 8v4M40 8v4M24 52v4M32 52v4M40 52v4"/>
+        </svg>
+        <h4 class="text-sm font-semibold text-gray-700 uppercase mb-1">Blazing Fast</h4>
+        <h3 class="text-xl font-bold uppercase mb-2">A18 Pro Chip</h3>
+        <p class="text-gray-500 max-w-xs">
+          Experience unmatched performance and efficiency with the all-new A18 Pro chip, powering Apple Intelligence and advanced AI.
+        </p>
+      </div>
+
+      <!-- Feature 3: Display -->
+      <div class="flex flex-col items-center">
+        <!-- Display Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4">
+          <rect x="8" y="12" width="48" height="36" rx="4" ry="4"/>
+          <path d="M24 52h16M32 48v4"/>
+        </svg>
+        <h4 class="text-sm font-semibold text-gray-700 uppercase mb-1">Brilliant Display</h4>
+        <h3 class="text-xl font-bold uppercase mb-2">6.3” Super Retina XDR</h3>
+        <p class="text-gray-500 max-w-xs">
+          Enjoy ultra-bright colors on the 6.3-inch Super Retina XDR display with ProMotion and Always-On technology.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 
