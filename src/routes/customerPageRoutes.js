@@ -8,6 +8,6 @@ router.get('/contact', customerPageController.contact);
 router.get('/points', customerPageController.points);
 router.post('/points', customerPageController.searchPoints);
 router.post('/products/preorder', customerPageController.preorder);
-
+router.get('/chat', customerPageController.chat);
 
 module.exports = router; 

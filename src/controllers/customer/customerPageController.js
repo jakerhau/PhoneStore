@@ -2,6 +2,8 @@ const Product = require('../../models/Product');
 const { multipleMongooseToObject } = require('../../util/mongoose');
 const Preorder = require('../../models/preorder');
 const Customer = require('../../models/Customer');
+const Chat = require('../../models/Chat');
+const { v4: uuidv4 } = require('uuid');
 
 class CustomerPageController {
     // [GET] / - Trang chủ khách hàng
@@ -167,6 +169,55 @@ class CustomerPageController {
 
     }
 
+    async chat(req, res, next) {
+        try {
+            // Kiểm tra xem đã có session chat trong cookie chưa
+            let sessionId = req.cookies?.chatSessionId;
+            let chat = null;
+            
+            if (sessionId) {
+                // Tìm chat hiện tại
+                chat = await Chat.findOne({ sessionId });
+            }
+            
+            if (!chat) {
+                // Tạo session mới nếu chưa có
+                sessionId = uuidv4();
+                chat = await Chat.create({
+                    sessionId,
+                    customer: {
+                        name: 'Anonymous',
+                        email: '',
+                        phone: ''
+                    }
+                });
+                
+                // Lưu sessionId vào cookie
+                res.cookie('chatSessionId', sessionId, { 
+                    maxAge: 24 * 60 * 60 * 1000, // 24 giờ
+                    httpOnly: false // Cho phép JavaScript đọc
+                });
+                
+                // Thông báo tới admin về chat mới qua Socket.IO
+                const io = req.app.get('io');
+                if (io) {
+                    io.emit('new-customer', {
+                        sessionId: chat.sessionId,
+                        customer: chat.customer,
+                        createdAt: chat.createdAt
+                    });
+                }
+            }
+            
+            res.render('customer/chat', {
+                layout: 'customerLayout',
+                sessionId: sessionId,
+                user: req.session.user || null
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = new CustomerPageController(); 

@@ -5,14 +5,19 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 const session = require('express-session');
 const flash = require('connect-flash');
 const moment = require('moment');
+const server = require('http').createServer(app);
+const initializeSocket = require('./src/util/socketio');
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET || 'nodejs',
@@ -95,6 +100,7 @@ const authRoutes = require('./src/routes/authRoutes');
 const promotionRoutes = require('./src/routes/promotionRoutes');
 const batchRoutes = require('./src/routes/batchRoutes');
 const supplierRoutes = require('./src/routes/supplierRoutes');
+const chatRoutes = require('./src/routes/chatRoutes');
 const { loggedIn, isAuth, isAdmin } = require('./src/middleware/auth.js');
 const { handlebars } = require('hbs');
 const { login } = require('./src/controllers/auth/authController.js');
@@ -113,7 +119,7 @@ app.use('/auth', authRoutes);
 
 // Customer routes (public)
 app.use('/', customerPageRoutes);
-
+app.use('/', chatRoutes);
 // Admin routes (protected)
 app.use('/admin', loggedIn);
 
@@ -144,6 +150,8 @@ app.use('/admin/preorder', preorderRoutes);
 app.use('/admin/promotions', promotionRoutes);
 app.use('/admin/batches', batchRoutes);
 app.use('/admin/suppliers', supplierRoutes);
+
+
 // 404 handler
 app.use((req, res, next) => {
     console.log(`404 Error - Route Not Found: ${req.originalUrl}`);
@@ -163,6 +171,9 @@ app.use((error, req, res, next) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}/`);
+const io = initializeSocket(server);
+app.set('io', io);
+
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });

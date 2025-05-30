@@ -1,0 +1,165 @@
+{{!-- Page chat của khách hàng và quản trị viên --}}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">Chat với Quản trị viên</h1>
+        
+        {{!-- Chat Container --}}
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            {{!-- Chat Header --}}
+            <div class="bg-blue-600 text-white p-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-lg font-semibold">Quản trị viên</h2>
+                        <p class="text-sm text-blue-100" id="admin-status">Đang kết nối...</p>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Chat Messages --}}
+            <div class="h-[500px] overflow-y-auto p-4 bg-gray-50" id="chat-messages">
+                {{!-- Messages will be loaded here --}}
+            </div>
+
+            {{!-- Typing Indicator --}}
+            <div id="typing-indicator" class="hidden px-4 py-2 bg-gray-100">
+                <p class="text-sm text-gray-500">Quản trị viên đang nhập tin nhắn...</p>
+            </div>
+
+            {{!-- Chat Input --}}
+            <form id="chat-form" class="p-4 border-t">
+                <div class="flex space-x-4">
+                    <input type="text" name="message" 
+                           class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                           placeholder="Nhập tin nhắn của bạn...">
+                    <button type="submit" 
+                            class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- Add JavaScript for auto-scroll to bottom --}}
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const sessionId = '{{sessionId}}';
+    let typingTimeout;
+
+    // Kết nối socket
+    socket.on('connect', () => {
+        console.log('Connected to chat server');
+        socket.emit('join-chat', sessionId);
+        document.getElementById('admin-status').textContent = 'Online';
+    });
+
+    // Nhận tin nhắn mới
+    socket.on('new-message', (message) => {
+        appendMessage(message);
+        scrollToBottom();
+    });
+
+    // Hiển thị trạng thái đang nhập
+    socket.on('user-typing', (data) => {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (data.isTyping) {
+            typingIndicator.classList.remove('hidden');
+        } else {
+            typingIndicator.classList.add('hidden');
+        }
+    });
+
+    // Gửi trạng thái đang nhập
+    document.querySelector('input[name="message"]').addEventListener('input', () => {
+        socket.emit('typing', { sessionId, isTyping: true });
+        
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+            socket.emit('typing', { sessionId, isTyping: false });
+        }, 1000);
+    });
+
+    // Gửi tin nhắn
+    document.getElementById('chat-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const input = e.target.querySelector('input[name="message"]');
+        const content = input.value.trim();
+        
+        if (!content) return;
+
+        try {
+            const response = await fetch(`/customer/chat/${sessionId}/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content })
+            });
+
+            if (response.ok) {
+                input.value = '';
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            showError('Không thể gửi tin nhắn. Vui lòng thử lại.');
+        }
+    });
+
+    // Hàm thêm tin nhắn vào UI
+    function appendMessage(message) {
+        const messagesContainer = document.getElementById('chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `flex items-start ${message.sender === 'customer' ? '' : 'justify-end'} mb-4`;
+        
+        messageDiv.innerHTML = `
+            <div class="${message.sender === 'customer' ? 'ml-3' : 'mr-3'}">
+                <div class="${message.sender === 'customer' ? 'bg-white' : 'bg-blue-600'} rounded-lg py-2 px-4 shadow-sm">
+                    <p class="${message.sender === 'customer' ? 'text-gray-800' : 'text-white'}">${message.content}</p>
+                </div>
+                <p class="text-xs text-gray-500 mt-1 ${message.sender === 'customer' ? '' : 'text-right'}">
+                    ${new Date(message.createdAt).toLocaleTimeString()}
+                </p>
+            </div>
+        `;
+        
+        messagesContainer.appendChild(messageDiv);
+    }
+
+    // Hàm cuộn xuống tin nhắn mới nhất
+    function scrollToBottom() {
+        const messagesContainer = document.getElementById('chat-messages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Hàm hiển thị lỗi
+    function showError(message) {
+        // Implement error notification
+        console.error(message);
+    }
+
+    // Load tin nhắn cũ
+    async function loadMessages() {
+        try {
+            const response = await fetch(`/customer/chat/${sessionId}/messages`);
+            const data = await response.json();
+            if (data.success) {
+                data.messages.forEach(message => appendMessage(message));
+                scrollToBottom();
+            }
+        } catch (error) {
+            console.error('Error loading messages:', error);
+        }
+    }
+
+    // Load tin nhắn khi trang được tải
+    loadMessages();
+</script>
