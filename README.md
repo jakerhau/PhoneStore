@@ -211,6 +211,7 @@ PUT  /admin/customer/edit    # Cập nhật khách hàng
 /admin/promotions   # Khuyến mãi
 /admin/batches      # Lô hàng
 /admin/suppliers    # Nhà cung cấp
+/admin/chat-page    # Hỗ trợ khách hàng
 ```
 
 ## 💡 Tính Năng Nổi Bật
