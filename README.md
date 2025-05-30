@@ -224,16 +224,6 @@ PUT  /admin/customer/edit    # Cập nhật khách hàng
 - **File Upload**: Upload hình ảnh sản phẩm với Multer
 - **Data Validation**: Kiểm tra dữ liệu với Express Validator
 
-## 🤝 Đóng Góp
-
-Mọi đóng góp đều được hoan nghênh! Vui lòng:
-
-1. Fork repository
-2. Tạo branch feature (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Mở Pull Request
-
 ### Products
 - GET /admin/products - Danh sách sản phẩm
 - POST /admin/product/add - Thêm sản phẩm mới
